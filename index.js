@@ -95,9 +95,9 @@ app.post('/reviews', async (req, res) => {
 
 
   app.post('/account', async (req, res) => {
-    const orders = req.body;
+    const users = req.body;
     
-    const results = await FacebookAccount.insertOne(orders);
+    const results = await FacebookAccount.insertOne(users);
      res.send(results)
   })
   
