@@ -100,7 +100,7 @@ app.post('/reviews', async (req, res) => {
 
 run().catch(console.dir)
 app.get('/',(req,res)=>{
-    res.send('from server uncle')
+    res.send('This is form Abdur rahiim')
 })
 app
 app.listen(port,()=>{
