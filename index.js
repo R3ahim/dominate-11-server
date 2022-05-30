@@ -88,8 +88,8 @@ app.post('/reviews', async (req, res) => {
      res.send(result)
   })
   app.get('/reviews' ,async(req,res)=>{
-    const orders = await reviewsCollection.find().toArray();
-    res.send(orders)
+    const orderses= await reviewsCollection.find().toArray();
+    res.send(orderses)
   })
     }
     finally{
