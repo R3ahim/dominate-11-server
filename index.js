@@ -38,8 +38,8 @@ async function run(){
    app.post('/orders', async (req, res) => {
     const orders = req.body;
     
-    const result = await orderCollection.insertOne(orders);
-     res.send(result)
+    const results = await orderCollection.insertOne(orders);
+     res.send(results)
   })
   app.get('/orders' ,async(req,res)=>{
     const orders = await orderCollection.find().toArray();
