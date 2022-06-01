@@ -104,6 +104,15 @@ app.post('/reviews', async (req, res) => {
     const orderses= await FacebookAccount.find().toArray();
     res.send(orderses)
   })
+  app.delete('/account/:id', async (req, res) => {
+    const id = req.body.id;
+   
+    const query = { _id: ObjectId(id) };
+    const result = await FacebookAccount.deleteOne(query);
+    console.log(result);
+    res.send(result);
+    // res.send(id)
+});
   
     }
     finally{
