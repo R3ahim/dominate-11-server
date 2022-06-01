@@ -100,6 +100,10 @@ app.post('/reviews', async (req, res) => {
     const results = await FacebookAccount.insertOne(users);
      res.send(results)
   })
+  app.get('account',async(req,res)=>{
+    const orderses= await reviewsCollection.find().toArray();
+    res.send(orderses)
+  })
   
     }
     finally{
