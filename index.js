@@ -125,7 +125,7 @@ run().catch(console.dir)
 app.get('/',(req,res)=>{
     res.send('This is form Abdur rahiim')
 })
-app
+
 app.listen(port,()=>{
     console.log('assginment-12port is  ',port);
 })
