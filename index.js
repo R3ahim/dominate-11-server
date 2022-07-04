@@ -14,84 +14,21 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run(){
     try{
      await client.connect();
-    const serviceCollection= client.db('toolsService').collection('service')
-    
-    const orderCollection= client.db('toolsService').collection('orderService')
-    const reviewsCollection= client.db('toolsService').collection('reviews')
+    const serviceCollection= client.db('toolsService').collection('carInfo')
+    const wpbser= client.db('toolsService').collection('wpb')
     const FacebookAccount= client.db('toolsService').collection('account')
     
 
-    app.get('/service',async(req,res)=>{
-        const service = await serviceCollection.find().toArray();
-        res.send(service)
+    app.get('/cars',async(req,res)=>{
+        const cars = await serviceCollection.find().toArray();
+        res.send(cars)
     });
-   app.get('/service/:id',async(req,res)=>{
-    const id = req.params.id;
-    console.log(id);
-    const query = { _id: ObjectId(id) };
-    console.log(query);
-    const service = await serviceCollection.findOne(query);
-    res.send(service);
-   })
-
-
-    //  orderCollection
-   app.post('/orders', async (req, res) => {
-    const orders = req.body;
-    
-    const results = await orderCollection.insertOne(orders);
-     res.send(results)
-  })
-  app.get('/orders' ,async(req,res)=>{
-    const orders = await orderCollection.find().toArray();
-    res.send(orders)
-  })
-  app.get('/orders/:id',async(req,res)=>{
-    const id = req.params.id;
-    const query = { _id: ObjectId(id) };
-    console.log(query);
-    const order = await orderCollection.findOne(query);
-    res.send(order)
-  })
-  app.delete('/orders/:id', async (req, res) => {
-    const id = req.body.id;
-
-    const query = { _id: ObjectId(id) };
-    const result = await orderCollection.deleteOne(query);
-    res.send(result);
-    // res.send(id)
-});
-app.put('/orders/:id', async (req, res) => {
-  const id = req.params.id;
-  const updateData = req.body;
-  const filter = { _id: ObjectId(id) };
-  const option = { upsert: true };
-  const udatedDoc = {
-      $set: {
-          name: updateData.name,
-          price: updateData.price,
-          quantity: updateData.quantity,
-          email:updateData.email,
-          paid:updateData.paid,
-
-      }
-  }
-  const result = await orderCollection.updateOne(filter, udatedDoc, option)
-  res.send(result)
-})
-
-
-// reveis collection
-app.post('/reviews', async (req, res) => {
-    const orders = req.body;
-    
-    const result = await reviewsCollection.insertOne(orders);
-     res.send(result)
-  })
-  app.get('/reviews' ,async(req,res)=>{
-    const orderses= await reviewsCollection.find().toArray();
-    res.send(orderses)
-  })
+   
+    app.get('/wpb',async(req,res)=>{
+        const wpbs = await wpbser.find().toArray();
+        res.send(wpbs)
+    });
+   
 
 
   app.post('/account', async (req, res) => {
@@ -100,6 +37,7 @@ app.post('/reviews', async (req, res) => {
     const results = await FacebookAccount.insertOne(users);
      res.send(results)
   })
+
   app.get('/account',async(req,res)=>{
     const orderses= await FacebookAccount.find().toArray();
     res.send(orderses)
