@@ -16,6 +16,7 @@ async function run(){
      await client.connect();
     const serviceCollection= client.db('toolsService').collection('carInfo')
     const wpbser= client.db('toolsService').collection('wpb')
+    const emailAccount= client.db('toolsService').collection('emails')
     const FacebookAccount= client.db('toolsService').collection('account')
     
 
@@ -23,13 +24,23 @@ async function run(){
         const cars = await serviceCollection.find().toArray();
         res.send(cars)
     });
+
    
     app.get('/wpb',async(req,res)=>{
         const wpbs = await wpbser.find().toArray();
         res.send(wpbs)
     });
    
-
+    app.post('/email',async(req,re,s)=>{
+        const email = req.body;
+        console.log(req.body)
+        const results = await emailAccount.insertOne(email);
+        res.send(results)
+    })
+    app.get('/email',async(req,res)=>{
+        const emails = await emailAccount.find().toArray();
+        res.send(emails)
+    });
 
   app.post('/account', async (req, res) => {
     const users = req.body;
