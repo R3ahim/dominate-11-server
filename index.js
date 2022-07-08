@@ -17,6 +17,7 @@ async function run(){
     const serviceCollection= client.db('toolsService').collection('carInfo')
     const wpbser= client.db('toolsService').collection('wpb')
     const emailAccount= client.db('toolsService').collection('emails')
+    const orderses= client.db('toolsService').collection('addCars')
     const FacebookAccount= client.db('toolsService').collection('account')
     
 
@@ -24,6 +25,13 @@ async function run(){
         const cars = await serviceCollection.find().toArray();
         res.send(cars)
     });
+
+     app.get('/cars/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const data = await serviceCollection.findOne(query)
+    res.send(data)
+     })
 
    
     app.get('/wpb',async(req,res)=>{
@@ -42,6 +50,32 @@ async function run(){
         res.send(emails)
     });
 
+    app.put('/addCars',async(req,res)=>{
+           const data = req.body;
+           const results = await serviceCollection.insertOne(data);
+           res.send(results)
+    })
+
+    app.get('/order',async(req,res)=>{
+        const results = await orderses.find().toArray();
+        res.send(results)
+    })
+    app.put('/order',async(req,res)=>{
+        const data = req.body;
+        const results = await orderses.insertOne(data);
+        res.send(results)
+ })
+   app.delete('/order/:id',async(req,res)=>{
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const result= await orderses.deleteOne(query);
+    res.send(result)
+   })
+ 
+ app.get('/addCars',async(req,res)=>{
+    const results = await addCarses.find().toArray();
+    res.send(results)
+})
   app.post('/account', async (req, res) => {
     const users = req.body;
     
