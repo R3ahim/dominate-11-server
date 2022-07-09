@@ -65,6 +65,12 @@ async function run(){
         const results = await orderses.insertOne(data);
         res.send(results)
  })
+   app.get('/order/:id',async(req,res)=>{
+    const  id = req.params.id;
+    const query = {_id:ObjectId(id)};
+    const result = await orderses.findOne(query);
+    res.send(result)
+   })
    app.delete('/order/:id',async(req,res)=>{
     const id = req.params.id;
     const query = { _id: ObjectId(id) };
